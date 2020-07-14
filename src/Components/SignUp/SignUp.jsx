@@ -82,6 +82,7 @@ export default function SignUp() {
                 autoComplete="lname"
               />
             </Grid>
+            <br></br>
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -108,7 +109,7 @@ export default function SignUp() {
             <Grid item xs={12}>
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="Accept Terms And Conditions."
+                label="accept terms and conditions."
               />
             </Grid>
           </Grid>
@@ -123,7 +124,7 @@ export default function SignUp() {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="http://localhost:3008/#" variant="body2">
+              <Link href="http://localhost:3002/" variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>

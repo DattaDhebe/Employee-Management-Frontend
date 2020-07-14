@@ -25,6 +25,9 @@ function Copyright() {
   );
 }
 
+const emailRegex = RegExp(/^[a-zA-Z]+([._+-][0-9a-zA-Z]+)*@[0-9a-zA-Z]+.[a-zA-Z]{2,4}([.][a-zA-Z]{2,3})?$/);
+const passwordRegex = RegExp(/((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,})/);
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -70,6 +73,7 @@ export default function SignIn() {
             autoComplete="email"
             autoFocus
           />
+          <br></br>
           <TextField
             variant="outlined"
             margin="normal"
@@ -98,7 +102,7 @@ export default function SignIn() {
             <Grid item xs>
             </Grid>
             <Grid item>
-              <Link href="http://localhost:3008/SignUp" variant="body2">
+              <Link href="http://localhost:3002/SignUp" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
