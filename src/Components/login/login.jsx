@@ -11,6 +11,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { black } from '@material-ui/core/colors';
 
 function Copyright() {
   return (
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%', 
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -52,7 +53,7 @@ export default function SignIn() {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
+        <Avatar className={classes.avatar }>
          
         </Avatar>
         <Typography component="h1" variant="h5">
@@ -98,7 +99,7 @@ export default function SignIn() {
             <Grid item xs>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="http://localhost:3008/SignUp" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
