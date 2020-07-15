@@ -11,7 +11,7 @@ import {Link } from "react-router-dom";
 
 import "./Table.scss";
 
-export class GetAllEmployee extends React.Component {
+export class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state={
@@ -27,14 +27,8 @@ export class GetAllEmployee extends React.Component {
       <Button variant="contained" color="primary"> Add Employee </Button>
       </Link>
       </div>
-      <div className="employeebtn">
-      <Link to="/">
-      <Button variant="contained" color="primary">  LogOut </Button>
-      </Link>
-      </div>
-      {/* <h2 align="center">Employee List </h2> */}
       <p class="title" align="center">
-      <Typography component="h1" variant="h5"> Employee List </Typography>
+      <Typography component="h1" variant="h5"> Employee Database </Typography>
       </p>
         <Table stickyHeader aria-label="sticky table" id='Employee'>  
           <TableHead>  
@@ -42,7 +36,6 @@ export class GetAllEmployee extends React.Component {
               <TableCell>ID</TableCell>  
               <TableCell align="right" >First Name</TableCell>  
               <TableCell align="right" >Last Name</TableCell>  
-              <TableCell align="right" >Gender</TableCell>  
               <TableCell align="right" >Email Id</TableCell>  
               <TableCell align="right" >Phone Number</TableCell>  
               <TableCell align="right" >City</TableCell>  

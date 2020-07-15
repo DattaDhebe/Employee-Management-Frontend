@@ -4,20 +4,20 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import "./Employee.scss";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const nameRegex = RegExp(/^[A-Z]{1}[a-z]{2,}$/);
 const emailRegex = RegExp(/^[0-9a-zA-Z]+([._+-][0-9a-zA-Z]+)*@[0-9a-zA-Z]+.[a-zA-Z]{2,4}([.][a-zA-Z]{2,3})?$/);
 const phoneRegex = RegExp(/^([0-9]{2}[ ])?([1-9]{1}[0-9]{9})$/);
 
-const formValid = formErrors => {
-  let valid = true;
+// const formValid = formErrors => {
+//   let valid = true;
 
-  Object.values(formErrors).forEach(value => {
-    value.length > 0 && (valid = false);
-  });
-  return valid;
-};
+//   Object.values(formErrors).forEach(value => {
+//     value.length > 0 && (valid = false);
+//   });
+//   return valid;
+// };
 
 
 export class Update extends React.Component {

@@ -1,4 +1,5 @@
 #Employee {
+    display: flex-wrap;
     text-align: center;
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
@@ -8,16 +9,23 @@
   }
   
   #Employee td, #Employee th {
+    display: flex-wrap;
     border: 1px solid #ddd;
     padding: 8px;
     font-size:20px;
   }
 
    .employeebtn {
-    margin: auto;
+    margin: 15px;
+    margin-bottom: auto;
     padding-top: 10px;
     align-items: center;
-    align:right;
+  }
+
+  .employeeSingOut {
+    margin: auto;
+    padding-top: 10px;
+
   }
   
   #Employee tr:nth-child(even){background-color: #f2f2f2;}
