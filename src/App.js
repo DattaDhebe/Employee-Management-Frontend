@@ -19,6 +19,7 @@ class App extends Component {
       axios.get(`https://api.github.com/users/${email}`)
       .then((res) => { 
         console.log(res);
+        alert("Login Successfully..!!");
         })
     
     //console.log(email);
@@ -28,10 +29,9 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <SignIn getUser={this.getUser} />
+      <div>       
       <Router>
-         
+          <SignIn getUser={this.getUser} />
           <Route exact path="/SignUp" component={SignUp} />
           <Route exact path="/Home" component={Home} />
           <Route path="/dashboard/addEmployee" component={AddEmployee} />

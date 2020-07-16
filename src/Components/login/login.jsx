@@ -6,7 +6,6 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -34,10 +33,12 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    align:'bottom',
   },
   avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    marginTop: '10%',
+    backgroundColor:'#3f51b5',
+
   },
   form: {
     width: '100%', 
@@ -99,15 +100,10 @@ const SignIn = (props) => {
           >
             Sign In
           </Button>
-          <Grid container>
-            <Grid item xs>
-            </Grid>
-            <Grid item>
-              <Link href="http://localhost:3002/SignUp" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
+          <Link href="http://localhost:3002/SignUp" variant="body2">
+              {"Don't have an account? Sign Up"}
+          </Link>
+        
         </form>
       </div>
       <Box mt={8}>
