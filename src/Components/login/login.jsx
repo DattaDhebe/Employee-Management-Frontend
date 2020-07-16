@@ -11,45 +11,66 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="#">
-        Employee Management 
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+//const emailRegex = RegExp(/^[a-zA-Z]+([._+-][0-9a-zA-Z]+)*@[0-9a-zA-Z]+.[a-zA-Z]{2,4}([.][a-zA-Z]{2,3})?$/);
+//const passwordRegex = RegExp(/((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,})/);
 
-// const emailRegex = RegExp(/^[a-zA-Z]+([._+-][0-9a-zA-Z]+)*@[0-9a-zA-Z]+.[a-zA-Z]{2,4}([.][a-zA-Z]{2,3})?$/);
-// const passwordRegex = RegExp(/((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,})/);
+// const formValid = formErrors => {
+//   let valid = true;
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    align:'bottom',
-  },
-  avatar: {
-    marginTop: '10%',
-    backgroundColor:'#3f51b5',
+//   Object.values(formErrors).forEach(value => {
+//     value.length > 0 && (valid = false);
+//   });
 
-  },
-  form: {
-    width: '100%', 
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
+//   return valid;
+// };
 
 const SignIn = (props) => {
+
+  // handleChange= (e)=> { 
+  //   console.log(e.target.value);
+  //   this.setState({[e.target.name]:e.target.value});  
+  //   console.log(this.state);
+  //   e.preventDefault();
+  //   const { name, value } = e.target;
+  //   let formErrors = this.state.formErrors;
+
+  //   switch (name) {
+  //     case "EmailId":
+  //       formErrors.EmailId = emailRegex.test(value) ? "" : "Invalid Email Id";
+  //       break;
+
+  //     case "Password":
+  //       formErrors.Password = passwordRegex.test(value) ?  "" : "Invalid Password";
+  //       break;
+
+  //     default:
+  //       break;
+  //   }
+
+  //   this.setState({ formErrors, [name]: value }, () => console.log(this.state));
+  // };
+  
+  // login=(e) => {
+  //   e.preventDefault();
+  //   console.log(this.state);
+  //   let requestData ={
+  //     EmailId:this.state.EmailId,
+  //     Password:this.state.Password
+  //   }
+    
+    // service.login(requestData).then((json)=>{
+    //   this.props.history.push("/dashboard");
+    //   console.log("responce data==>",json);
+    // if(json.data.status==='Success'){  
+    // alert('Login Sucessfull !!');  
+    // }   
+      
+    // }).catch((err)=>{
+    //   console.log(err);
+      
+    // })
+
+  //}
 
   const classes = useStyles();
 
@@ -113,5 +134,42 @@ const SignIn = (props) => {
   );
 
 }
+
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="#">
+        Employee Management 
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    align:'bottom',
+  },
+  avatar: {
+    marginTop: '30%',
+    backgroundColor:'#3f51b5',
+
+  },
+  form: {
+    width: '100%', 
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
+
+
 
 export default SignIn;
