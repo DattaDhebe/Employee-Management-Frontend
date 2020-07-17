@@ -6,36 +6,20 @@ import SignUp from './Components/SignUp/SignUp';
 import { AddEmployee } from './Components/Dashboard/AddEmployee';
 import Home from './Components/Dashboard/Home';
 import { Update } from './Components/Dashboard/Update'
-import axios from 'axios';
+//import axios from 'axios';
 
 
 class App extends Component {
-
-  getUser = (e) => {
-    e.preventDefault();
-    const email = e.target.elements.email.value;
-    const password = e.target.elements.password.value;
-    //axios.get(`my Rest api link"/${email}&${password}`),
-      axios.get(`https://api.github.com/users/${email}`)
-      .then((res) => { 
-        console.log(res);
-        alert("Login Successfully..!!");
-        })
-    
-    //console.log(email);
-    //console.log(password);
-
-  }
 
   render() {
     return (
       <div>       
       <Router>
-          <SignIn getUser={this.getUser} />
-          <Route path="signup" component={SignUp} />
-          <Route path="/Home" component={Home} />
-          <Route path="/dashboard/addEmployee" component={AddEmployee} />
-          <Route path="/dashboard/update" component={Update} />
+          <Route exact path="/" component={SignIn} />
+          <Route path="/signup" component={SignUp} />
+          <Route path="/home" component={Home} />
+          <Route path="/home/addEmployee" component={AddEmployee} />
+          <Route path="/home/update" component={Update} />
       </Router>
       </div>
     );
