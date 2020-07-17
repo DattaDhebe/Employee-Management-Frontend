@@ -39,7 +39,9 @@ const rows = [
 ];
 
 const useStyles = makeStyles({
+  display: 'flex',
   table: {
+    
     minWidth: 700,
   },
 });
@@ -50,15 +52,15 @@ export default function Home() {
   return (
     
     <TableContainer component={Paper}>
-      <h1>Employee Management SYstem</h1>
+      <h1 style={{textAlign:'center'}}>Employee Management System</h1>
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-            <StyledTableCell align="right">Calories</StyledTableCell>
-            <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+            <StyledTableCell>Employee Name</StyledTableCell>
+            <StyledTableCell align="right">Email</StyledTableCell>
+            <StyledTableCell align="right">Designation</StyledTableCell>
+            <StyledTableCell align="right">Edit</StyledTableCell>
+            <StyledTableCell align="right">Delete</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
