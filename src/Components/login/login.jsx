@@ -157,7 +157,7 @@ const useStyles = makeStyles((theme) => ({
     align:'bottom',
   },
   avatar: {
-    marginTop: '30%',
+    marginTop: '10%',
     backgroundColor:'#3f51b5',
 
   },
