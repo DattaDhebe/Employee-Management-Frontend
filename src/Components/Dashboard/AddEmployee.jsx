@@ -120,13 +120,16 @@ export default class AddEmployee extends React.Component  {
     return (
       <div>
       <Container className={useStyles.formLayout} component="main" maxWidth="xs" margin="25%">
-        <BootstrapButton variant="contained" color="primary" style={{ float: 'right' }} disableRipple className={useStyles.margin}>
+      <BootstrapButton href="./Home" variant="contained" color="primary" style={{ float: 'left' }} disableRipple className={useStyles.margin}>
+          Go Back
+      </BootstrapButton>
+      <BootstrapButton href="./" variant="contained" color="primary" style={{ float: 'right' }} disableRipple className={useStyles.margin}>
           Logout
       </BootstrapButton>
         <CssBaseline />
         <div className={useStyles.paper}>
           <Avatar className={useStyles.avatar}>
-            <AssignmentIcon align="center" />
+            <AssignmentIcon />
           </Avatar>
           <Typography component="h1" variant="h5" align="center">
             Employee Registration

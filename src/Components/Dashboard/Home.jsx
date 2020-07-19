@@ -101,10 +101,10 @@ export default class Home extends React.Component {
     return (
       <div>
     <div>
-      <BootstrapButton variant="contained" color="primary" disableRipple className={useStyles.margin}>
+      <BootstrapButton href="/AddEmployee" variant="contained" color="primary" disableRipple className={useStyles.margin}>
         Add Employee
       </BootstrapButton>
-        <BootstrapButton variant="contained" color="primary" style={{float:'right'}} disableRipple className={useStyles.margin}>
+        <BootstrapButton href="./" variant="contained" color="primary" style={{float:'right'}} disableRipple className={useStyles.margin}>
         Logout
       </BootstrapButton>
     </div>

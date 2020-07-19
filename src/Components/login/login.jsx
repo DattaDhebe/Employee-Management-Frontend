@@ -12,42 +12,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { axios } from "axios";
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="#">
-        Employee Management 
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    align:'bottom',
-  },
-  avatar: {
-    marginTop: '10%',
-    backgroundColor:'#3f51b5',
-
-  },
-  form: {
-    width: '100%', 
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
-
-
 export default class SignIn extends React.Component {
 
   state = {
@@ -121,12 +85,11 @@ export default class SignIn extends React.Component {
             color="primary"
             className={useStyles.submit}
           >
-            Sign In
+              Sign In
           </Button>
-          <Link href="http://localhost:3002/SignUp" variant="body2">
+            <Link href="./SignUp" variant="body2" >
               {"Don't have an account? Sign Up"}
-          </Link>
-        
+          </Link>       
         </form>
       </div>
       <Box mt={8}>
@@ -136,3 +99,38 @@ export default class SignIn extends React.Component {
     );  
   }
 }
+
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="#">
+        Employee Management 
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    align:'bottom',
+  },
+  avatar: {
+    marginTop: '10%',
+    backgroundColor:'#3f51b5',
+
+  },
+  form: {
+    width: '100%', 
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
