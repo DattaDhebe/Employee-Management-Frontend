@@ -8,6 +8,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import EditIcon from '@material-ui/icons/Edit';
+import Fab from '@material-ui/core/Fab';
+import DeleteIcon from '@material-ui/icons/Delete';
 import axios from 'axios';
 
 
@@ -68,13 +71,6 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-function createData(id, first_Name, last_Name, email, edit, delet) {
-  return { id, first_Name, last_Name, email, edit, delet }; 
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-];
 
 const useStyles = makeStyles((theme) => ({
   display: 'flex',
@@ -118,25 +114,37 @@ export default class Home extends React.Component {
       <Table className={useStyles.table} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Employee Id</StyledTableCell>
+            <StyledTableCell align="center">Employee Id</StyledTableCell>
             <StyledTableCell align="center">First Name</StyledTableCell>
             <StyledTableCell align="center">Last Name</StyledTableCell>
             <StyledTableCell align="center">Email</StyledTableCell>             
-            <StyledTableCell align="right">Edit</StyledTableCell>
-            <StyledTableCell align="right">Delete</StyledTableCell>
+            <StyledTableCell align="center">Edit</StyledTableCell>
+            <StyledTableCell align="center">Delete</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {this.state.employees.map((row) => (
             <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row">
+              <StyledTableCell component="th" scope="row" align="center">
                 {row.id}
               </StyledTableCell>
               <StyledTableCell align="center">{row.first_name}</StyledTableCell>
               <StyledTableCell align="center">{row.last_name}</StyledTableCell>
               <StyledTableCell align="center">{row.email}</StyledTableCell>
-              <StyledTableCell align="center">{row.edit}</StyledTableCell>
-              <StyledTableCell align="center">{row.delet}</StyledTableCell>
+              <StyledTableCell align="center">{
+                  <Fab style={{color:'#fff', backgroundColor:'#3f51b5', }} aria-label="edit">
+                  <EditIcon />
+                  </Fab>
+              }</StyledTableCell>
+              <StyledTableCell align="center">{
+                    <Button style={{color:'#fff', backgroundColor:'#3f51b5', textTransform:'none'}}
+                    variant="contained"
+                    className={useStyles.button}
+                    startIcon={<DeleteIcon />}
+                    >
+                      Delete
+                    </Button> 
+              }</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

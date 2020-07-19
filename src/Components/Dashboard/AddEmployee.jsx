@@ -1,179 +1,192 @@
-import React from "react";
-import "./Employee.scss";
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
+import React from 'react';
+import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import AssignmentIcon from '@material-ui/icons/Assignment';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 
-const nameRegex = RegExp(/^[A-Z]{1}[a-z]{2,}$/);
-const emailRegex = RegExp(/^[0-9a-zA-Z]+([._+-][0-9a-zA-Z]+)*@[0-9a-zA-Z]+.[a-zA-Z]{2,4}([.][a-zA-Z]{2,3})?$/);
-const phoneRegex = RegExp(/^([0-9]{2}[ ])?([1-9]{1}[0-9]{9})$/);
+const BootstrapButton = withStyles({
+  root: {
+    boxShadow: 'none',
+    textTransform: 'none',
+    fontSize: 16,
+    padding: '6px 12px',
+    border: '1px solid',
+    lineHeight: 1.5,
+    backgroundColor: '#0063cc',
+    borderColor: '#0063cc',
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+    '&:hover': {
+      backgroundColor: '#0069d9',
+      borderColor: '#0062cc',
+      boxShadow: 'none',
+    },
+    '&:active': {
+      boxShadow: 'none',
+      backgroundColor: '#0062cc',
+      borderColor: '#005cbf',
+    },
+    '&:focus': {
+      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
+    },
+  },
+})(Button);
 
-// const formValid = formErrors => {
-//   let valid = true;
+// const ColorButton = withStyles((theme) => ({
+//   root: {
+//     color: theme.palette.getContrastText(purple[500]),
+//     backgroundColor: purple[500],
+//     '&:hover': {
+//       backgroundColor: purple[700],
+//     },
+//   },
+// }))(Button);
 
-//   Object.values(formErrors).forEach(value => {
-//     value.length > 0 && (valid = false);
-//   });
+// const useStyles = makeStyles((theme) => ({
+//   margin: {
+//     margin: theme.spacing(1),
+//   },
+// }));
 
-//   return valid;
-// };
+// const theme = createMuiTheme({
+//   palette: {
+//     primary: green,
+//   },
+// });
 
-export class AddEmployee extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state={
-      FirstName:null,
-      LastName:null,
-      Gender:null,
-      PhoneNumber:null,
-      EmailId:null,
-      City:null,
-     
-      formErrors: {
-        FirstName:'',
-        LastName:'',
-        Gender:'',
-        PhoneNumber:'',
-        EmailId:'',
-        City:''
-      }
-    }
-  }
-  
-  handleChange= (e)=> { 
-    console.log(e.target.value);
-    this.setState({[e.target.name]:e.target.value});  
-    console.log(this.state);
-    //validation
-    e.preventDefault();
-    const { name, value } = e.target;
-    let formErrors = this.state.formErrors;
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(25),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor:'#3f51b5',
+  },
+  form: {
+    width: '100%', 
+    marginTop: theme.spacing(3),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+  blue: {
+    color: '#fff',
+    backgroundColor: '#3f51b5',
+  },
+}));
+
+export default function AddEmployee() {
+  const classes = useStyles();
+
+  return (
     
-    switch (name) {
-
-      case "FirstName":
-        formErrors.FirstName = nameRegex.test(value) ? "" : "Invalid First Name";
-        break;
-
-      case "LastName":
-        formErrors.LastName = nameRegex.test(value) ? "" : "Invalid Last Name";
-        break;  
-
-      case "Gender":
-        formErrors.Gender = nameRegex.test(value) ? "" : "Invalid Gender";
-        break;  
-
-      case "PhoneNumber":
-        formErrors.PhoneNumber = phoneRegex.test(value) ? "" : "Invalid Phone Number";
-        break; 
-
-      case "City":
-        formErrors.City = nameRegex.test(value) ? "" : "Invalid City";
-        break; 
-
-      case "EmailId":
-        formErrors.EmailId = emailRegex.test(value) ? "" : "Invalid Email Id";
-        break;
-
-      default:
-        break;
-    }
-        this.setState({ formErrors, [name]: value }, () => console.log(this.state));
-  }; 
-
-  render() 
-  {
-    const { formErrors } = this.state;
-    return (
-        <div class="login-box">
-        <form class="container">
-        <p class="title" align="center">
-            <Typography component="h1" variant="h5">
-             Add Employee
-            </Typography>
-            </p>
-            <Grid container spacing={5}>
-            <Grid item xs={6}>
-            <TextField
-            className={formErrors.FirstName.length > 0 ? "error" : null}
-            name="FirstName" 
-            label="First Name" 
-            variant="outlined" 
-            onChange={this.handleChange} 
-            value={this.state.FirstName} required/>
-            <div className="error">{formErrors.FirstName.length > 0 && (<span className="errorMessage">{formErrors.FirstName}</span>)} 
-            </div> 
+    <Container component="main" maxWidth="xs">
+      <BootstrapButton variant="contained" color="primary" style={{float:'right'}} disableRipple className={classes.margin}>
+        Logout
+      </BootstrapButton>
+      <CssBaseline />
+      <div className={classes.paper}>
+      <Avatar className={classes.blue}>
+        <AssignmentIcon />
+      </Avatar>
+        <Typography component="h1" variant="h5">
+          Employee Registration
+        </Typography>
+        <form className={classes.form} noValidate>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                autoComplete="fname"
+                name="first_name"
+                variant="outlined"
+                required
+                fullWidth
+                id="firstName"
+                label="First Name"
+                autoFocus
+              />
             </Grid>
-
-            <Grid item xs={6}>
-            <TextField 
-            className={formErrors.LastName.length > 0 ? "error" : null}
-            name="LastName" 
-            label="Last Name" 
-            variant="outlined" 
-            onChange={this.handleChange} 
-            value={this.state.LastName} required/>
-            <div className="error">{formErrors.LastName.length > 0 && (<span className="errorMessage">{formErrors.LastName}</span>)} 
-            </div>            
+            <Grid item xs={12} sm={6}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="last_name"
+                label="Last Name"
+                name="lastName"
+                autoComplete="lname"
+              />
             </Grid>
-
-            <Grid item xs={6}>
-            <TextField 
-            className={formErrors.Gender.length > 0 ? "error" : null}
-            name="Gender" 
-            label="Gender" 
-            variant="outlined" 
-            onChange={this.handleChange} 
-            value={this.state.Gender} required/>
-            <div className="error">{formErrors.Gender.length > 0 && (<span className="errorMessage">{formErrors.Gender}</span>)} 
-            </div> 
+            <br></br>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+              />
             </Grid>
-
-            <Grid item xs={6}>
-            <TextField 
-            className={formErrors.PhoneNumber.length > 0 ? "error" : null}
-            name="PhoneNumber" 
-            label="Phone Number" 
-            variant="outlined" 
-            onChange={this.handleChange} 
-            value={this.state.PhoneNumber} required/>
-            <div className="error">{formErrors.PhoneNumber.length > 0 && (<span className="errorMessage">{formErrors.PhoneNumber}</span>)} 
-            </div> 
+            <br></br>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="mobile"
+                label="Contact Number"
+                name="mobile"
+                autoComplete="mobile"
+              />
             </Grid>
-
-            <Grid item xs={6}>
-            <TextField 
-            className={formErrors.EmailId.length > 0 ? "error" : null}
-            name="EmailId" 
-            label="Email Id" 
-            variant="outlined" 
-            onChange={this.handleChange} 
-            value={this.state.EmailId} required/>
-            <div className="error">{formErrors.EmailId.length > 0 && (<span className="errorMessage">{formErrors.EmailId}</span>)} 
-            </div> 
+            <br></br>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="designation"
+                label="Designation"
+                name="designation"
+                autoComplete="designation"
+              />
             </Grid>
-
-            <Grid item xs={6}>
-            <TextField 
-            className={formErrors.City.length > 0 ? "error" : null}
-            name="City" 
-            label="City" 
-            variant="outlined" 
-            onChange={this.handleChange} 
-            value={this.state.City} required/>
-            <div className="error">{formErrors.City.length > 0 && (<span className="errorMessage">{formErrors.City}</span>)} 
-            </div> 
-            </Grid>
-
-            <Grid item xs={12} className="footers">
-                <div className="btn">
-            <Button variant="contained" color="primary" onClick={this.addEmployee}  className="submit"> Submit </Button>
-            </div>
-             </Grid>
-             </Grid>
-            </form>
-        </div>
-    );
-  }
+          </Grid>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Register
+          </Button>
+        </form>
+      </div>
+      <Box mt={5}>
+      </Box>
+    </Container>
+  );
 }
