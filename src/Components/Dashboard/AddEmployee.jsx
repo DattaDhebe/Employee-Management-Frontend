@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
+import axios from 'axios';
 
 const BootstrapButton = withStyles({
   root: {
@@ -48,29 +49,6 @@ const BootstrapButton = withStyles({
   },
 })(Button);
 
-// const ColorButton = withStyles((theme) => ({
-//   root: {
-//     color: theme.palette.getContrastText(purple[500]),
-//     backgroundColor: purple[500],
-//     '&:hover': {
-//       backgroundColor: purple[700],
-//     },
-//   },
-// }))(Button);
-
-// const useStyles = makeStyles((theme) => ({
-//   margin: {
-//     margin: theme.spacing(1),
-//   },
-// }));
-
-// const theme = createMuiTheme({
-//   palette: {
-//     primary: green,
-//   },
-// });
-
-
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(25),
@@ -79,7 +57,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   avatar: {
-    margin: theme.spacing(1),
+    marginTop:'20%',
+    margin: theme.spacing(15),
+    color:'#000',
     backgroundColor:'#3f51b5',
   },
   form: {
@@ -93,100 +73,142 @@ const useStyles = makeStyles((theme) => ({
     color: '#fff',
     backgroundColor: '#3f51b5',
   },
+  formLayout: {
+    marginTop: '15%',
+
+  }
 }));
 
-export default function AddEmployee() {
-  const classes = useStyles();
+export default class AddEmployee extends React.Component  {
+  
+  state = {
+    first_name: '',
+    last_name: '',
+    email: '',
+    mobile: '',
+    designation: ''
+  }
 
-  return (
-    
-    <Container component="main" maxWidth="xs">
-      <BootstrapButton variant="contained" color="primary" style={{float:'right'}} disableRipple className={classes.margin}>
-        Logout
+  handleChange = event => {
+    this.setState({ first_name: event.target.first_name });
+    this.setState({ last_name: event.target.last_name });
+    this.setState({ email: event.target.email });
+    this.setState({ mobile: event.target.mobile });
+    this.setState({ designation: event.target.designation });
+  }
+
+  handleSubmit = event => {
+    event.preventDefault();
+
+    const user = {
+      first_name: this.state.first_name,
+      last_name: this.state.last_name,
+      email: this.state.email,
+      mobile: this.state.mobile,
+      designation: this.state.designation
+    };
+
+    axios.post(`http://localhost:3000/employees`, { user })
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+        console.log("Record Added Successfully..!");
+      })
+  }
+
+  render() {
+    return (
+      <div>
+      <Container className={useStyles.formLayout} component="main" maxWidth="xs" margin="25%">
+        <BootstrapButton variant="contained" color="primary" style={{ float: 'right' }} disableRipple className={useStyles.margin}>
+          Logout
       </BootstrapButton>
-      <CssBaseline />
-      <div className={classes.paper}>
-      <Avatar className={classes.blue}>
-        <AssignmentIcon />
-      </Avatar>
-        <Typography component="h1" variant="h5">
-          Employee Registration
+        <CssBaseline />
+        <div className={useStyles.paper}>
+          <Avatar className={useStyles.avatar}>
+            <AssignmentIcon align="center" />
+          </Avatar>
+          <Typography component="h1" variant="h5" align="center">
+            Employee Registration
         </Typography>
-        <form className={classes.form} noValidate>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="fname"
-                name="first_name"
-                variant="outlined"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                autoFocus
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="last_name"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
-              />
+          <form className={useStyles.form} onSubmit={this.handleSubmit} noValidate>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField onChange={this.handleChange}
+                  autoComplete="fname"
+                  name="first_name"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="firstName"
+                  label="First Name"
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField onChange={this.handleChange}
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="last_name"
+                  label="Last Name"
+                  name="last_name"
+                  autoComplete="lname"
+                />
+              </Grid>
+              <br></br>
+              <Grid item xs={12}>
+                <TextField onChange={this.handleChange}
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                />
+              </Grid>
+              <br></br>
+              <Grid item xs={12}>
+                <TextField onChange={this.handleChange}
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="mobile"
+                  label="Contact Number"
+                  name="mobile"
+                  autoComplete="mobile"
+                />
+              </Grid>
+              <br></br>
+              <Grid item xs={12}>
+                <TextField onChange={this.handleChange}
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="designation"
+                  label="Designation"
+                  name="designation"
+                  autoComplete="designation"
+                />
+              </Grid>
             </Grid>
             <br></br>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-              />
-            </Grid>
-            <br></br>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="mobile"
-                label="Contact Number"
-                name="mobile"
-                autoComplete="mobile"
-              />
-            </Grid>
-            <br></br>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="designation"
-                label="Designation"
-                name="designation"
-                autoComplete="designation"
-              />
-            </Grid>
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Register
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={useStyles.submit}
+            >
+              Register
           </Button>
-        </form>
+          </form>
+        </div>
+        <Box mt={5}>
+        </Box>
+        </Container>
       </div>
-      <Box mt={5}>
-      </Box>
-    </Container>
-  );
+    );
+  }
 }
