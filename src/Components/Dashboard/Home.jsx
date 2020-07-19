@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 
+
 const BootstrapButton = withStyles({
   root: {
     boxShadow: 'none',
@@ -17,6 +18,7 @@ const BootstrapButton = withStyles({
     fontSize: 16,
     padding: '6px 12px',
     border: '1px solid',
+    marginTop:'2%',
     lineHeight: 1.5,
     backgroundColor: '#0063cc',
     borderColor: '#0063cc',
@@ -72,10 +74,6 @@ function createData(id, first_Name, last_Name, email, edit, delet) {
 
 const rows = [
   createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
 const useStyles = makeStyles((theme) => ({
@@ -89,63 +87,63 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Home() {
-  const classes = useStyles();
-
+export default class Home extends React.Component {
+  
   state = {
-    employee: []
-  };
+    employees: []
+  }
 
   componentDidMount() {
     axios.get(`http://localhost:3000/employees`)
       .then(res => {
-        const employee = res.data;
-        this.setState({ employee });
+        const employees = res.data;
+        this.setState({ employees });
       })
   }
 
-  return (
+  render() {
+    return (
+      <div>
     <div>
-    <div>
-      <BootstrapButton variant="contained" color="primary" disableRipple className={classes.margin}>
+      <BootstrapButton variant="contained" color="primary" disableRipple className={useStyles.margin}>
         Add Employee
       </BootstrapButton>
-        <BootstrapButton variant="contained" color="primary" style={{float:'right'}} disableRipple className={classes.margin}>
+        <BootstrapButton variant="contained" color="primary" style={{float:'right'}} disableRipple className={useStyles.margin}>
         Logout
       </BootstrapButton>
     </div>
     
     <TableContainer component={Paper}>
       <h1 style={{textAlign:'center'}}>Employee Management System</h1>
-      <Table className={classes.table} aria-label="customized table">
+      <Table className={useStyles.table} aria-label="customized table">
         <TableHead>
           <TableRow>
             <StyledTableCell>Employee Id</StyledTableCell>
-            <StyledTableCell align="right">First Name</StyledTableCell>
-            <StyledTableCell align="right">Last Name</StyledTableCell>
-            <StyledTableCell align="right">Email</StyledTableCell>             
+            <StyledTableCell align="center">First Name</StyledTableCell>
+            <StyledTableCell align="center">Last Name</StyledTableCell>
+            <StyledTableCell align="center">Email</StyledTableCell>             
             <StyledTableCell align="right">Edit</StyledTableCell>
             <StyledTableCell align="right">Delete</StyledTableCell>
           </TableRow>
         </TableHead>
-          <TableBody>
-            <ul>
-          {state.employee.map((employee) => (
+        <TableBody>
+          {this.state.employees.map((row) => (
             <StyledTableRow key={row.name}>
               <StyledTableCell component="th" scope="row">
-                {employee.id}
+                {row.id}
               </StyledTableCell>
-              <StyledTableCell align="right">{employee.first_Name}</StyledTableCell>
-              <StyledTableCell align="right">{employee.last_Name}</StyledTableCell>
-              <StyledTableCell align="right">{employee.email}</StyledTableCell>
-              <StyledTableCell align="right">{employee.edit}</StyledTableCell>
-              <StyledTableCell align="right">{employee.delet}</StyledTableCell>
+              <StyledTableCell align="center">{row.first_name}</StyledTableCell>
+              <StyledTableCell align="center">{row.last_name}</StyledTableCell>
+              <StyledTableCell align="center">{row.email}</StyledTableCell>
+              <StyledTableCell align="center">{row.edit}</StyledTableCell>
+              <StyledTableCell align="center">{row.delet}</StyledTableCell>
             </StyledTableRow>
           ))}
-              </ul>
         </TableBody>
       </Table>
       </TableContainer>
       </div>
-  );
+    )
+  }
 }
+  
