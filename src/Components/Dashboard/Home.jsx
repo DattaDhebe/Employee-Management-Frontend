@@ -8,6 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 
 const BootstrapButton = withStyles({
   root: {
@@ -65,8 +66,8 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
+function createData(id, first_Name, last_Name, email, edit, delet) {
+  return { id, first_Name, last_Name, email, edit, delet }; 
 }
 
 const rows = [
@@ -91,6 +92,18 @@ const useStyles = makeStyles((theme) => ({
 export default function Home() {
   const classes = useStyles();
 
+  state = {
+    employee: []
+  };
+
+  componentDidMount() {
+    axios.get(`http://localhost:3000/employees`)
+      .then(res => {
+        const employee = res.data;
+        this.setState({ employee });
+      })
+  }
+
   return (
     <div>
     <div>
@@ -107,25 +120,29 @@ export default function Home() {
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Employee Name</StyledTableCell>
-            <StyledTableCell align="right">Email</StyledTableCell>
-            <StyledTableCell align="right">Designation</StyledTableCell>
+            <StyledTableCell>Employee Id</StyledTableCell>
+            <StyledTableCell align="right">First Name</StyledTableCell>
+            <StyledTableCell align="right">Last Name</StyledTableCell>
+            <StyledTableCell align="right">Email</StyledTableCell>             
             <StyledTableCell align="right">Edit</StyledTableCell>
             <StyledTableCell align="right">Delete</StyledTableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
-          {rows.map((row) => (
+          <TableBody>
+            <ul>
+          {state.employee.map((employee) => (
             <StyledTableRow key={row.name}>
               <StyledTableCell component="th" scope="row">
-                {row.name}
+                {employee.id}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
+              <StyledTableCell align="right">{employee.first_Name}</StyledTableCell>
+              <StyledTableCell align="right">{employee.last_Name}</StyledTableCell>
+              <StyledTableCell align="right">{employee.email}</StyledTableCell>
+              <StyledTableCell align="right">{employee.edit}</StyledTableCell>
+              <StyledTableCell align="right">{employee.delet}</StyledTableCell>
             </StyledTableRow>
           ))}
+              </ul>
         </TableBody>
       </Table>
       </TableContainer>
