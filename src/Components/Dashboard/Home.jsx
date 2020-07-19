@@ -7,6 +7,45 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+
+const BootstrapButton = withStyles({
+  root: {
+    boxShadow: 'none',
+    textTransform: 'none',
+    fontSize: 16,
+    padding: '6px 12px',
+    border: '1px solid',
+    lineHeight: 1.5,
+    backgroundColor: '#0063cc',
+    borderColor: '#0063cc',
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+    '&:hover': {
+      backgroundColor: '#0069d9',
+      borderColor: '#0062cc',
+      boxShadow: 'none',
+    },
+    '&:active': {
+      boxShadow: 'none',
+      backgroundColor: '#0062cc',
+      borderColor: '#005cbf',
+    },
+    '&:focus': {
+      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
+    },
+  },
+})(Button);
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -38,18 +77,30 @@ const rows = [
   createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   display: 'flex',
   table: {
     
     minWidth: 700,
   },
-});
+  margin: {
+    margin: theme.spacing(1),
+  },
+}));
 
 export default function Home() {
   const classes = useStyles();
 
   return (
+    <div>
+    <div>
+      <BootstrapButton variant="contained" color="primary" disableRipple className={classes.margin}>
+        Add Employee
+      </BootstrapButton>
+        <BootstrapButton variant="contained" color="primary" style={{float:'right'}} disableRipple className={classes.margin}>
+        Logout
+      </BootstrapButton>
+    </div>
     
     <TableContainer component={Paper}>
       <h1 style={{textAlign:'center'}}>Employee Management System</h1>
@@ -77,6 +128,7 @@ export default function Home() {
           ))}
         </TableBody>
       </Table>
-    </TableContainer>
+      </TableContainer>
+      </div>
   );
 }
