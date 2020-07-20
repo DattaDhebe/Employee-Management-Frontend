@@ -5,7 +5,7 @@ import SignIn from './Components/login/login';
 import SignUp from './Components/SignUp/SignUp';
 import Home from './Components/Dashboard/Home';
 import AddEmployee from './Components/Dashboard/AddEmployee';
-import { Update } from './Components/Dashboard/Update';
+import Update from './Components/Dashboard/Update';
 
 
 class App extends Component {
@@ -18,7 +18,7 @@ class App extends Component {
           <Route path="/signup" component={SignUp} />
           <Route path="/home" component={Home} />
           <Route path="/AddEmployee" component={AddEmployee} />
-          <Route path="/home/update" component={Update} />
+          <Route path="/update" component={Update} />
       </Router>
       </div>
     );

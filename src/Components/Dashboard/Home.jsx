@@ -19,10 +19,6 @@ export default class Home extends React.Component {
     employees: []
   }
 
-  // onIdDeleteChange = event => {
-  //   this.setState({ id: event.target.value });
-  // }
-
   componentDidMount() {
     axios.get(`http://localhost:3000/emp`)
       .then(res => {
@@ -83,7 +79,7 @@ export default class Home extends React.Component {
               <StyledTableCell align="center">{row.last_name}</StyledTableCell>
               <StyledTableCell align="center">{row.email}</StyledTableCell>
               <StyledTableCell align="center">{
-                  <Fab style={{color:'#fff', backgroundColor:'#3f51b5', }} aria-label="edit">
+                  <Fab href="./Update" style={{color:'#fff', backgroundColor:'#3f51b5', }} aria-label="edit">
                   <EditIcon />
                   </Fab>
               }</StyledTableCell>
@@ -116,7 +112,7 @@ const BootstrapButton = withStyles({
     border: '1px solid',
     marginTop:'2%',
     lineHeight: 1.5,
-    backgroundColor: '#0063cc',
+    backgroundColor:'#3f51b5',
     borderColor: '#0063cc',
     fontFamily: [
       '-apple-system',

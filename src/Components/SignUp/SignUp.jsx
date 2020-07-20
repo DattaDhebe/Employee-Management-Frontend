@@ -12,8 +12,54 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axios from 'axios';
+import styled from 'styled-components';
+
+const emailRegex = RegExp(/^[0-9a-zA-Z]+([._+-][0-9a-zA-Z]+)*@[0-9a-zA-Z]+.[a-zA-Z]{2,4}([.][a-zA-Z]{2,3})?$/);
+const passwordRegex = RegExp(/((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,})/);
 
 export default class SignUp extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state={
+      EmailId:null,
+      Password:null,
+
+      formErrors: {
+        email: "",
+        password: ""
+      }
+    }
+  }
+  handleChange= (e)=> { 
+    console.log(e.target.value);
+    this.setState({[e.target.name]:e.target.value});  
+    console.log(this.state);
+    e.preventDefault();
+    const { name, value } = e.target;
+    let formErrors = this.state.formErrors;
+
+    switch (name) {
+      case "EmailId":
+        formErrors.email = emailRegex.test(value) ? "" : "Invalid Email Id";
+        break;
+
+      case "Password":
+        formErrors.password = passwordRegex.test(value) ?  "" : "Invalid Password";
+        break;
+
+      default:
+        break;
+    }
+
+    this.setState({ formErrors, [name]: value }, () => console.log(this.state));
+ };
+
+  login=(e) => {
+    e.preventDefault();
+    console.log(this.state);
+    
+  }
 
   state = {
     first_name: "",
@@ -67,22 +113,26 @@ export default class SignUp extends React.Component {
 
   render()
   {
-  
+    const { formErrors } = this.state;
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={useStyles.paper}>
-        <align-items>
-          <Avatar className={useStyles.avatar}>
-            </Avatar>
-            </align-items>
+          
+            <Div>
+            <align-items><Avatar className={useStyles.avatar}>
+              </Avatar></align-items>
+              </Div>
+            
           <Typography component="h1" variant="h5" align="center">
             Sign up
         </Typography>
           <form className={useStyles.form} onSubmit={this.handleSubmit} noValidate>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
-                <TextField onChange={this.onFirstNameChange}
+                <TextField
+                  
+                  onChange={this.onFirstNameChange}
                   autoComplete="fname"
                   name="first_name"
                   variant="outlined"
@@ -106,7 +156,9 @@ export default class SignUp extends React.Component {
               </Grid>
               <br></br>
               <Grid item xs={12}>
-                <TextField onChange={this.onEmailChange}
+                <TextField
+                  className={formErrors.email.length > 0 ? "error" : null}
+                  onChange={this.onEmailChange}
                   variant="outlined"
                   required
                   fullWidth
@@ -115,9 +167,13 @@ export default class SignUp extends React.Component {
                   name="email"
                   autoComplete="email"
                 />
+                <div className="error">{formErrors.email.length > 0 && (<span className="errorMessage">{formErrors.email}</span>)} 
+                </div>
               </Grid>
               <Grid item xs={12}>
-                <TextField onChange={this.onPasswordChange}
+                <TextField
+                  className={formErrors.password.length > 0 ? "error" : null}
+                  onChange={this.onPasswordChange}
                   variant="outlined"
                   required
                   fullWidth
@@ -127,6 +183,8 @@ export default class SignUp extends React.Component {
                   id="password"
                   autoComplete="current-password"
                 />
+                <div className="error">{formErrors.password.length > 0 && (<span className="errorMessage" >{formErrors.password}</span>)}
+                </div>
               </Grid>
               <Grid item xs={12} >
                 <FormControlLabel
@@ -160,6 +218,12 @@ export default class SignUp extends React.Component {
     );
   }
 }
+
+const Div = styled.div`
+  margin-top: 20%;
+  align-item: center;
+
+`;
 
 function Copyright() {
   return (

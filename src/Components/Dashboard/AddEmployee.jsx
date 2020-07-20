@@ -1,5 +1,4 @@
 import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -7,9 +6,9 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import AssignmentIcon from '@material-ui/icons/Assignment';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
+import styled from 'styled-components';
 
 export default class AddEmployee extends React.Component  {
   
@@ -74,21 +73,19 @@ export default class AddEmployee extends React.Component  {
 
   render() {
     return (
+      <div>
+        <Div></Div>
       <Container className={useStyles.formLayout} component="main" maxWidth="xs" margin="25%">
-      <BootstrapButton href="./Home" variant="contained" color="primary" style={{ float: 'left' }} disableRipple className={useStyles.margin}>
+        <BootstrapButton href="./Home" variant="contained" color="primary" style={{ float: 'left' }} disableRipple className={useStyles.margin}>
           Home
       </BootstrapButton>
       <BootstrapButton href="./" variant="contained" color="primary" style={{ float: 'right' }} disableRipple className={useStyles.margin}>
-          Logout
-      </BootstrapButton>
+            Logout
+      </BootstrapButton>  
         <CssBaseline />
-        <div className={useStyles.paper}>
-          <Avatar className={useStyles.avatar}>
-            <AssignmentIcon />
-          </Avatar>
           <Typography component="h1" variant="h5" align="center">
             Add Employee
-        </Typography>
+          </Typography>
           <form className={useStyles.form} onSubmit={this.handleSubmit} noValidate>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
@@ -162,13 +159,19 @@ export default class AddEmployee extends React.Component  {
               Submit
           </Button>
           </form>
-        </div>
         <Box mt={5}>
         </Box>
         </Container>
+        </div>
     );
   }
 }
+
+const Div = styled.div`
+  margin-top: 20%;
+  align-item: center;
+
+`;
 
 const BootstrapButton = withStyles({
   root: {
@@ -178,7 +181,7 @@ const BootstrapButton = withStyles({
     padding: '6px 12px',
     border: '1px solid',
     lineHeight: 1.5,
-    backgroundColor: '#0063cc',
+    backgroundColor:'#3f51b5',
     borderColor: '#0063cc',
     fontFamily: [
       '-apple-system',
@@ -215,12 +218,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
   },
-  avatar: {
-    marginTop:'20%',
-    margin: theme.spacing(15),
-    color:'#000',
-    backgroundColor:'#3f51b5',
-  },
   form: {
     width: '100%', 
     marginTop: theme.spacing(3),
@@ -235,5 +232,5 @@ const useStyles = makeStyles((theme) => ({
   formLayout: {
     marginTop: '15%',
 
-  }
+  },
 }));

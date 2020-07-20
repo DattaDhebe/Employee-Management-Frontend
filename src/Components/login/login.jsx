@@ -10,7 +10,6 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-//import { axios } from "axios";
 
 const emailRegex = RegExp(/^[0-9a-zA-Z]+([._+-][0-9a-zA-Z]+)*@[0-9a-zA-Z]+.[a-zA-Z]{2,4}([.][a-zA-Z]{2,3})?$/);
 const passwordRegex = RegExp(/((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,})/);
@@ -56,44 +55,7 @@ export default class SignIn extends React.Component {
     e.preventDefault();
     console.log(this.state);
     
-    // service.login(requestData).then((json)=>{
-    //   this.props.history.push("/dashboard");
-    //   console.log("responce data==>",json);
-    // if(json.data.status==='Success'){  
-    // alert('Login Sucessfull !!');  
-    // }   
-      
-    // }).catch((err)=>{
-    //   console.log(err);
-      
-    // })
-
   }
-
-
-  // state = {
-  //   username: '',
-  //   password: ''
-  // }
-
-  // handleChange = event => {
-  //   this.setState({ name: event.target.value });
-  // }
-
-  // handleSubmit = event => {
-  //   event.preventDefault();
-
-  //   const user = {
-  //     username: this.state.username,
-  //     password: this.state.password
-  //   };
-
-  //   axios.post(`http://localhost:3000/user`, { user })
-  //     .then(res => {
-  //       console.log(res);
-  //       console.log(res.data);
-  //     })
-  // }
 
   render() { 
     const { formErrors } = this.state;
@@ -128,7 +90,6 @@ export default class SignIn extends React.Component {
             onChange={this.handleChange}
             align="left"
             variant="outlined"
-            margin="normal"
             required
             fullWidth
             name="Password"
@@ -144,12 +105,13 @@ export default class SignIn extends React.Component {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           /></div>
-          <Button
+            <Button
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={useStyles.submit}
+            href="./Home"
           >
               Sign In
           </Button>
