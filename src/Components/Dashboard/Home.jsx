@@ -13,6 +13,99 @@ import Fab from '@material-ui/core/Fab';
 import DeleteIcon from '@material-ui/icons/Delete';
 import axios from 'axios';
 
+export default class Home extends React.Component {
+  
+  state = {
+    employees: []
+  }
+
+  // onIdDeleteChange = event => {
+  //   this.setState({ id: event.target.value });
+  // }
+
+  componentDidMount() {
+    axios.get(`http://localhost:3000/emp`)
+      .then(res => {
+        const employees = res.data;
+        this.setState({ employees });
+      })
+      .catch(
+        err => console.log(err),
+      );
+  }
+
+  deleteContact(id) {
+    axios.delete(`http://localhost:3000/emp/${id}`)
+      .then(res => {
+        console.log(res);
+        alert("Record Deleted Successfully..!")
+        window.location.reload();
+        console.log(res.data);
+      })
+      .catch(
+        err => console.log(err),
+      );
+  }
+
+  render() {
+    
+    return (
+      <div>
+    <div>
+      <BootstrapButton href="/AddEmployee" variant="contained" color="primary" disableRipple className={useStyles.margin}>
+        Add Employee
+      </BootstrapButton>
+        <BootstrapButton href="./" variant="contained" color="primary" style={{float:'right'}} disableRipple className={useStyles.margin}>
+        Logout
+      </BootstrapButton>
+    </div>
+    
+    <TableContainer component={Paper}>
+      <h1 style={{textAlign:'center'}}>Employee Management System</h1>
+      <Table className={useStyles.table} aria-label="customized table">
+        <TableHead>
+          <TableRow>
+            <StyledTableCell align="center">Employee Id</StyledTableCell>
+            <StyledTableCell align="center">First Name</StyledTableCell>
+            <StyledTableCell align="center">Last Name</StyledTableCell>
+            <StyledTableCell align="center">Email</StyledTableCell>             
+            <StyledTableCell align="center">Edit</StyledTableCell>
+            <StyledTableCell align="center">Delete</StyledTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {this.state.employees.map((row) => (
+            <StyledTableRow key={row.name}>
+              <StyledTableCell component="th" scope="row" align="center">
+                {row.id} 
+              </StyledTableCell>
+              <StyledTableCell align="center">{row.first_name}</StyledTableCell>
+              <StyledTableCell align="center">{row.last_name}</StyledTableCell>
+              <StyledTableCell align="center">{row.email}</StyledTableCell>
+              <StyledTableCell align="center">{
+                  <Fab style={{color:'#fff', backgroundColor:'#3f51b5', }} aria-label="edit">
+                  <EditIcon />
+                  </Fab>
+              }</StyledTableCell>
+              <StyledTableCell align="center">{
+                    <Button style={{color:'#fff', backgroundColor:'#3f51b5', textTransform:'none'}}
+                    onClick={ () => this.deleteContact(row.id) }
+                    variant="contained"
+                    className={useStyles.button}
+                    startIcon={<DeleteIcon />}
+                    >
+                      Delete
+                    </Button> 
+              }</StyledTableCell>
+            </StyledTableRow>
+          ))}
+        </TableBody>
+      </Table>
+      </TableContainer>
+      </div>
+    )
+  }
+}
 
 const BootstrapButton = withStyles({
   root: {
@@ -82,76 +175,4 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
   },
 }));
-
-export default class Home extends React.Component {
-  
-  state = {
-    employees: []
-  }
-
-  componentDidMount() {
-    axios.get(`http://localhost:3000/emp`)
-      .then(res => {
-        const employees = res.data;
-        this.setState({ employees });
-      })
-  }
-
-  render() {
-    return (
-      <div>
-    <div>
-      <BootstrapButton href="/AddEmployee" variant="contained" color="primary" disableRipple className={useStyles.margin}>
-        Add Employee
-      </BootstrapButton>
-        <BootstrapButton href="./" variant="contained" color="primary" style={{float:'right'}} disableRipple className={useStyles.margin}>
-        Logout
-      </BootstrapButton>
-    </div>
-    
-    <TableContainer component={Paper}>
-      <h1 style={{textAlign:'center'}}>Employee Management System</h1>
-      <Table className={useStyles.table} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell align="center">Employee Id</StyledTableCell>
-            <StyledTableCell align="center">First Name</StyledTableCell>
-            <StyledTableCell align="center">Last Name</StyledTableCell>
-            <StyledTableCell align="center">Email</StyledTableCell>             
-            <StyledTableCell align="center">Edit</StyledTableCell>
-            <StyledTableCell align="center">Delete</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {this.state.employees.map((row) => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row" align="center">
-                {row.id}
-              </StyledTableCell>
-              <StyledTableCell align="center">{row.first_name}</StyledTableCell>
-              <StyledTableCell align="center">{row.last_name}</StyledTableCell>
-              <StyledTableCell align="center">{row.email}</StyledTableCell>
-              <StyledTableCell align="center">{
-                  <Fab style={{color:'#fff', backgroundColor:'#3f51b5', }} aria-label="edit">
-                  <EditIcon />
-                  </Fab>
-              }</StyledTableCell>
-              <StyledTableCell align="center">{
-                    <Button style={{color:'#fff', backgroundColor:'#3f51b5', textTransform:'none'}}
-                    variant="contained"
-                    className={useStyles.button}
-                    startIcon={<DeleteIcon />}
-                    >
-                      Delete
-                    </Button> 
-              }</StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-      </TableContainer>
-      </div>
-    )
-  }
-}
   

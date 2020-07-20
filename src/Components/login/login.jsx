@@ -10,36 +10,93 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { axios } from "axios";
+//import { axios } from "axios";
 
+const emailRegex = RegExp(/^[0-9a-zA-Z]+([._+-][0-9a-zA-Z]+)*@[0-9a-zA-Z]+.[a-zA-Z]{2,4}([.][a-zA-Z]{2,3})?$/);
+const passwordRegex = RegExp(/((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,})/);
 
 export default class SignIn extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state={
+      EmailId:null,
+      Password:null,
 
-  state = {
-    username: '',
-    password: ''
+      formErrors: {
+        email: "",
+        password: ""
+      }
+    }
+  }
+  handleChange= (e)=> { 
+    console.log(e.target.value);
+    this.setState({[e.target.name]:e.target.value});  
+    console.log(this.state);
+    e.preventDefault();
+    const { name, value } = e.target;
+    let formErrors = this.state.formErrors;
+
+    switch (name) {
+      case "EmailId":
+        formErrors.email = emailRegex.test(value) ? "" : "Invalid Email Id";
+        break;
+
+      case "Password":
+        formErrors.password = passwordRegex.test(value) ?  "" : "Invalid Password";
+        break;
+
+      default:
+        break;
+    }
+
+    this.setState({ formErrors, [name]: value }, () => console.log(this.state));
+ };
+
+  login=(e) => {
+    e.preventDefault();
+    console.log(this.state);
+    
+    // service.login(requestData).then((json)=>{
+    //   this.props.history.push("/dashboard");
+    //   console.log("responce data==>",json);
+    // if(json.data.status==='Success'){  
+    // alert('Login Sucessfull !!');  
+    // }   
+      
+    // }).catch((err)=>{
+    //   console.log(err);
+      
+    // })
+
   }
 
-  handleChange = event => {
-    this.setState({ name: event.target.value });
-  }
 
-  handleSubmit = event => {
-    event.preventDefault();
+  // state = {
+  //   username: '',
+  //   password: ''
+  // }
 
-    const user = {
-      username: this.state.username,
-      password: this.state.password
-    };
+  // handleChange = event => {
+  //   this.setState({ name: event.target.value });
+  // }
 
-    axios.post(`http://localhost:3000/user`, { user })
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-      })
-  }
+  // handleSubmit = event => {
+  //   event.preventDefault();
 
-  render() {
+  //   const user = {
+  //     username: this.state.username,
+  //     password: this.state.password
+  //   };
+
+  //   axios.post(`http://localhost:3000/user`, { user })
+  //     .then(res => {
+  //       console.log(res);
+  //       console.log(res.data);
+  //     })
+  // }
+
+  render() { 
+    const { formErrors } = this.state;
     return (
       <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -49,7 +106,9 @@ export default class SignIn extends React.Component {
           Sign in
         </Typography>
         <form className={useStyles.form} onSubmit={this.handleSubmit}>
-            <TextField onChange={this.handleChange}
+            <TextField 
+            className={formErrors.email.length > 0 ? "error" : null}
+            onChange={this.handleChange}
             align="left"
             variant="outlined"
             margin="normal"
@@ -57,23 +116,29 @@ export default class SignIn extends React.Component {
             fullWidth
             id="email"
             label="Email Address"
-            name="username"
+            name="EmailId"
             autoComplete="email"
             autoFocus
-          />
+            />
+            <div className="error">{formErrors.email.length > 0 && (<span className="errorMessage">{formErrors.email}</span>)} 
+            </div> 
           <br></br>
-            <TextField onChange={this.handleChange}
+            <TextField 
+            className={formErrors.password.length > 0 ? "error" : null}
+            onChange={this.handleChange}
             align="left"
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            name="password"
+            name="Password"
             label="Password"
             type="password"
             id="password"
             autoComplete="current-password"
             />
+            <div className="error">{formErrors.password.length > 0 && (<span className="errorMessage" >{formErrors.password}</span>)}
+            </div>
             <div align="left">
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}

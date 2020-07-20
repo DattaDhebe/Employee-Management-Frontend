@@ -74,10 +74,9 @@ export default class AddEmployee extends React.Component  {
 
   render() {
     return (
-      <div>
       <Container className={useStyles.formLayout} component="main" maxWidth="xs" margin="25%">
       <BootstrapButton href="./Home" variant="contained" color="primary" style={{ float: 'left' }} disableRipple className={useStyles.margin}>
-          Go Back
+          Home
       </BootstrapButton>
       <BootstrapButton href="./" variant="contained" color="primary" style={{ float: 'right' }} disableRipple className={useStyles.margin}>
           Logout
@@ -88,7 +87,7 @@ export default class AddEmployee extends React.Component  {
             <AssignmentIcon />
           </Avatar>
           <Typography component="h1" variant="h5" align="center">
-            Employee Registration
+            Add Employee
         </Typography>
           <form className={useStyles.form} onSubmit={this.handleSubmit} noValidate>
             <Grid container spacing={2}>
@@ -160,14 +159,13 @@ export default class AddEmployee extends React.Component  {
               color="primary"
               className={useStyles.submit}
             >
-              Register
+              Submit
           </Button>
           </form>
         </div>
         <Box mt={5}>
         </Box>
         </Container>
-      </div>
     );
   }
 }

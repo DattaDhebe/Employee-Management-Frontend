@@ -67,12 +67,15 @@ export default class SignUp extends React.Component {
 
   render()
   {
+  
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={useStyles.paper}>
-          <Avatar className={useStyles.avatar} >
-          </Avatar>
+        <align-items>
+          <Avatar className={useStyles.avatar}>
+            </Avatar>
+            </align-items>
           <Typography component="h1" variant="h5" align="center">
             Sign up
         </Typography>
@@ -180,6 +183,7 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
+    alignItems: 'center',
     backgroundColor:'#3f51b5',
   },
   form: {
