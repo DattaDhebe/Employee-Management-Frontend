@@ -11,6 +11,167 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 
+export default class AddEmployee extends React.Component  {
+  
+  state = {
+    first_name: "",
+    last_name: "",
+    email: "",
+    mobile: "",
+    designation: ""
+  };
+
+  onFirstNameChange = e => {
+    this.setState({
+      first_name: e.target.value
+    });
+  };
+
+  onLastNameChange = e => {
+    this.setState({
+      last_name: e.target.value
+    });
+  };
+
+  onEmailChange = e => {
+    this.setState({
+      email: e.target.value
+    });
+  };
+
+  onMobileChange = e => {
+    this.setState({
+      mobile: e.target.value
+    });
+  };
+
+  onDesignationChange = e => {
+    this.setState({
+      designation: e.target.value
+    });
+  };
+  
+  handleSubmit = e => {
+    e.preventDefault();
+    const data = {
+      first_name: this.state.first_name,
+      last_name: this.state.last_name,
+      email: this.state.email,
+      mobile: this.state.mobile,
+      designation: this.state.designation
+    };
+    axios
+      .post("http://localhost:3000/emp", data)
+      .then(
+        res => console.log(res),
+        alert("Record Added Successfully..!")
+      )
+      .catch(
+        err => console.log(err),
+      );
+  };
+
+
+  render() {
+    return (
+      <div>
+      <Container className={useStyles.formLayout} component="main" maxWidth="xs" margin="25%">
+      <BootstrapButton href="./Home" variant="contained" color="primary" style={{ float: 'left' }} disableRipple className={useStyles.margin}>
+          Go Back
+      </BootstrapButton>
+      <BootstrapButton href="./" variant="contained" color="primary" style={{ float: 'right' }} disableRipple className={useStyles.margin}>
+          Logout
+      </BootstrapButton>
+        <CssBaseline />
+        <div className={useStyles.paper}>
+          <Avatar className={useStyles.avatar}>
+            <AssignmentIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5" align="center">
+            Employee Registration
+        </Typography>
+          <form className={useStyles.form} onSubmit={this.handleSubmit} noValidate>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField onChange={this.onFirstNameChange}
+                  autoComplete="fname"
+                  name="first_name"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="firstName"
+                  label="First Name"
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField onChange={this.onLastNameChange}
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="last_name"
+                  label="Last Name"
+                  name="last_name"
+                  autoComplete="lname"
+                />
+              </Grid>
+              <br></br>
+              <Grid item xs={12}>
+                <TextField onChange={this.onEmailChange}
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                />
+              </Grid>
+              <br></br>
+              <Grid item xs={12}>
+                <TextField onChange={this.onMobileChange}
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="mobile"
+                  label="Contact Number"
+                  name="mobile"
+                  autoComplete="mobile"
+                />
+              </Grid>
+              <br></br>
+              <Grid item xs={12}>
+                <TextField onChange={this.onDesignationChange}
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="designation"
+                  label="Designation"
+                  name="designation"
+                  autoComplete="designation"
+                />
+              </Grid>
+            </Grid>
+            <br></br>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={useStyles.submit}
+            >
+              Register
+          </Button>
+          </form>
+        </div>
+        <Box mt={5}>
+        </Box>
+        </Container>
+      </div>
+    );
+  }
+}
+
 const BootstrapButton = withStyles({
   root: {
     boxShadow: 'none',
@@ -78,140 +239,3 @@ const useStyles = makeStyles((theme) => ({
 
   }
 }));
-
-export default class AddEmployee extends React.Component  {
-  
-  state = {
-    first_name: '',
-    last_name: '',
-    email: '',
-    mobile: '',
-    designation: ''
-  }
-
-  handleChange = event => {
-    this.setState({ first_name: event.target.first_name });
-    this.setState({ last_name: event.target.last_name });
-    this.setState({ email: event.target.email });
-    this.setState({ mobile: event.target.mobile });
-    this.setState({ designation: event.target.designation });
-  }
-
-  handleSubmit = event => {
-    event.preventDefault();
-
-    const user = {
-      first_name: this.state.first_name,
-      last_name: this.state.last_name,
-      email: this.state.email,
-      mobile: this.state.mobile,
-      designation: this.state.designation
-    };
-
-    axios.post(`http://localhost:3000/employees`, { user })
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-        console.log("Record Added Successfully..!");
-      })
-  }
-
-  render() {
-    return (
-      <div>
-      <Container className={useStyles.formLayout} component="main" maxWidth="xs" margin="25%">
-      <BootstrapButton href="./Home" variant="contained" color="primary" style={{ float: 'left' }} disableRipple className={useStyles.margin}>
-          Go Back
-      </BootstrapButton>
-      <BootstrapButton href="./" variant="contained" color="primary" style={{ float: 'right' }} disableRipple className={useStyles.margin}>
-          Logout
-      </BootstrapButton>
-        <CssBaseline />
-        <div className={useStyles.paper}>
-          <Avatar className={useStyles.avatar}>
-            <AssignmentIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5" align="center">
-            Employee Registration
-        </Typography>
-          <form className={useStyles.form} onSubmit={this.handleSubmit} noValidate>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField onChange={this.handleChange}
-                  autoComplete="fname"
-                  name="first_name"
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField onChange={this.handleChange}
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="last_name"
-                  label="Last Name"
-                  name="last_name"
-                  autoComplete="lname"
-                />
-              </Grid>
-              <br></br>
-              <Grid item xs={12}>
-                <TextField onChange={this.handleChange}
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                />
-              </Grid>
-              <br></br>
-              <Grid item xs={12}>
-                <TextField onChange={this.handleChange}
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="mobile"
-                  label="Contact Number"
-                  name="mobile"
-                  autoComplete="mobile"
-                />
-              </Grid>
-              <br></br>
-              <Grid item xs={12}>
-                <TextField onChange={this.handleChange}
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="designation"
-                  label="Designation"
-                  name="designation"
-                  autoComplete="designation"
-                />
-              </Grid>
-            </Grid>
-            <br></br>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={useStyles.submit}
-            >
-              Register
-          </Button>
-          </form>
-        </div>
-        <Box mt={5}>
-        </Box>
-        </Container>
-      </div>
-    );
-  }
-}

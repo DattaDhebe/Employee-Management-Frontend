@@ -90,7 +90,7 @@ export default class Home extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:3000/employees`)
+    axios.get(`http://localhost:3000/emp`)
       .then(res => {
         const employees = res.data;
         this.setState({ employees });
