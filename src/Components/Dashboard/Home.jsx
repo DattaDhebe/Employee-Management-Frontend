@@ -20,6 +20,11 @@ export default class Home extends React.Component {
   }
 
   componentDidMount() {
+    this.employee();
+    this.deleteContact();
+  }
+
+  employee = () => {
     axios.get(`http://localhost:3000/emp`)
       .then(res => {
         const employees = res.data;
@@ -48,7 +53,7 @@ export default class Home extends React.Component {
     return (
       <div>
     <div>
-      <BootstrapButton href="/AddEmployee" variant="contained" color="primary" disableRipple className={useStyles.margin}>
+      <BootstrapButton href="./AddEmployee" variant="contained" color="primary" disableRipple className={useStyles.margin}>
         Add Employee
       </BootstrapButton>
         <BootstrapButton href="./" variant="contained" color="primary" style={{float:'right'}} disableRipple className={useStyles.margin}>

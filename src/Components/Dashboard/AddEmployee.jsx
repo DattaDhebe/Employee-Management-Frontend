@@ -49,7 +49,7 @@ export default class AddEmployee extends React.Component  {
       designation: e.target.value
     });
   };
-  
+
   handleSubmit = e => {
     e.preventDefault();
     const data = {
@@ -69,7 +69,6 @@ export default class AddEmployee extends React.Component  {
         err => console.log(err),
       );
   };
-
 
   render() {
     return (
@@ -170,7 +169,6 @@ export default class AddEmployee extends React.Component  {
 const Div = styled.div`
   margin-top: 20%;
   align-item: center;
-
 `;
 
 const BootstrapButton = withStyles({
